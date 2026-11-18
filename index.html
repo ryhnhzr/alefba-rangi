@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#6a4bf0">
+<title>الفبای رنگی</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@500;800&display=swap">
+<style>
+:root{--bg:#eef2ff;--bar:#6a4bf0;--card:#fff;--ink:#2b2350;--slot:#dfe5ff;--wl:42%;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);background:linear-gradient(var(--bar) 50%,var(--card) 50%)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16122b;--bar:#3a2a85;--card:#25204a;--ink:#f3efff;--slot:#332c63;--wl:72%}}
+:root[data-theme="dark"]{--bg:#16122b;--bar:#3a2a85;--card:#25204a;--ink:#f3efff;--slot:#332c63;--wl:72%}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{height:100%;margin:0;display:flex;flex-direction:column;font-family:Vazirmatn,Tahoma,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 25%,rgba(255,200,87,.3) 0 90px,transparent 91px),radial-gradient(circle at 92% 70%,rgba(255,107,157,.22) 0 120px,transparent 121px),var(--bg);-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+button{font:inherit;font-weight:800;border:0;cursor:pointer;color:#2a1b3d;background:#fff;border-radius:20px}
+button:focus-visible{outline:4px solid #7b5cff}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:var(--bar);color:#fff;font-size:20px;font-weight:800;box-shadow:0 3px 8px rgba(0,0,0,.25)}
+.bar b{font-size:22px}#mc{font-size:34px;margin-inline-end:8px}
+.chip{background:rgba(255,255,255,.2);border-radius:20px;padding:4px 12px;font-size:18px}
+.stage{padding:8px 14px 4px;text-align:center}
+.word{background:var(--card);border-radius:28px;font-size:clamp(56px,17vw,110px);font-weight:800;line-height:1.5;min-height:1.6em;margin:6px 0;box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.word span{color:hsl(var(--h) 80% var(--wl))}
+#rs{font-size:17px;font-weight:800;margin:4px}
+.seg{display:inline-flex;background:var(--slot);border-radius:30px;padding:4px}
+.seg button{min-height:44px;padding:0 18px;font-size:17px;border-radius:26px;background:transparent;color:var(--ink)}
+.seg .on{background:var(--bar);color:#fff}
+.slots{display:flex;gap:10px;justify-content:center;margin:8px 0}
+.slot{min-width:72px;height:80px;border-radius:20px;background:var(--slot);border:3px dashed #9aa6e8;font-size:46px;line-height:74px;font-weight:800;color:#7c88c9}
+.slot.f{background:hsl(var(--h) 90% 72%);border:0;line-height:80px;color:#2a1b3d}
+#msg{min-height:1.5em;font-size:18px;font-weight:800}
+#pad{flex:1;min-height:0;display:flex;flex-direction:column;padding:0 12px}
+.vow{display:flex;gap:10px;padding:6px 0}
+.vow button{flex:1;min-height:60px;font-size:38px;line-height:1;background:#ffd54f;box-shadow:0 5px 0 #d99a00}
+.vow small{display:block;font-size:15px}
+#kb{flex:1;min-height:0;overflow-y:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:9px;align-content:start;padding:4px 2px 12px}
+#kb button{aspect-ratio:1;font-size:38px;padding:0;background:hsl(var(--h) 90% 72%);box-shadow:0 5px 0 hsl(var(--h) 55% 45%)}
+button:active{transform:translateY(4px);box-shadow:none!important}
+.dock{display:flex;gap:8px;align-items:center;justify-content:space-around;padding:8px 10px;background:var(--card);border-radius:26px 26px 0 0;box-shadow:0 -4px 14px rgba(0,0,0,.15)}
+.dock button{min-width:64px;min-height:64px;padding:4px 8px;background:var(--slot);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:26px;line-height:1.1}
+.dock small{font-size:14px;font-weight:500}
+.dock .go{flex:1;max-width:230px;flex-direction:row;gap:8px;font-size:21px;background:#2fbf71;color:#fff;box-shadow:0 5px 0 #1d8a4f}
+.hint{animation:pl .6s infinite alternate;outline:4px solid #fff}
+@keyframes pl{to{transform:scale(1.15)}}
+.shake{animation:sh .4s}
+@keyframes sh{25%{transform:translateX(-14px)}75%{transform:translateX(14px)}}
+.cf{position:fixed;top:-50px;font-style:normal;font-size:30px;pointer-events:none;z-index:9;animation:fall 2.4s ease-in forwards}
+@keyframes fall{to{transform:translateY(115vh) rotate(540deg)}}
+#ok{position:fixed;inset:0;background:rgba(0,0,0,.5);display:grid;place-items:center;z-index:5;padding:16px}
+.card{background:var(--card);border-radius:30px;padding:20px;text-align:center;font-size:34px;font-weight:800;max-width:520px;width:100%}
+.card p{font-size:22px;margin:6px}
+.card .row{display:flex;gap:10px;justify-content:center}
+.card button{min-height:60px;padding:0 18px;font-size:21px;background:var(--slot);color:var(--ink)}
+.card .go{background:#2fbf71;color:#fff}
+@media(prefers-reduced-motion:reduce){.hint,.cf{animation:none}}
+</style>
+</head>
+<body>
+<header class="bar"><span><span id="mc">🐰</span><b>الفبای رنگی</b></span><span class="chip">⭐ <span id="sc">۰</span> <span id="st"></span></span></header>
+
+<section id="T" class="stage">
+  <div class="word" id="tw"></div>
+  <div id="rs"></div>
+</section>
+<section id="C" class="stage" hidden>
+  <div class="seg"><button id="le" class="on">👀 ساده</button><button id="ll">👂 شنیداری</button></div>
+  <div class="word" id="cw"></div>
+  <div class="slots" id="ci"></div>
+  <div id="msg"></div>
+</section>
+
+<div id="pad"><div class="vow" id="vw"></div><div id="kb"></div></div>
+
+<nav class="dock" id="dT">
+  <button id="tsay"><b>🔊</b><small>بشنو</small></button>
+  <button id="tbs"><b>⌫</b><small>پاک</small></button>
+  <button id="rb"><b>🎙</b><small>ضبط صدا</small></button>
+  <button id="tgo" class="go">▶ بده به کودک</button>
+</nav>
+<nav class="dock" id="dC" hidden>
+  <button id="cback"><b>👩‍🏫</b><small>معلم</small></button>
+  <button id="csay" class="go">🔊 دوباره بشنو</button>
+  <button id="cbs"><b>⌫</b><small>پاک</small></button>
+</nav>
+
+<div id="ok" hidden><div class="card"><div id="okt"></div><div class="row"><button id="again">🔁 دوباره</button><button id="newq" class="go">کلمه‌ی جدید</button></div></div></div>
+
+<script>
+const L=[..."آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی"];
+const V=["\u064E","\u0650","\u064F"];
+const ST=["🐱","🐰","🦋","🌸","🐠","🦄","🐥","🍓","🌈","🐼"];
+const $=i=>document.getElementById(i);
+let mode="T",lvl="easy",tgt=[],ent=[],errs=0,sc=0,tm,ac,mr=null,ms=null,pool=L;
+try{sc=+localStorage.getItem("alefba")||0}catch(e){}
+
+const H=l=>(L.indexOf(l)*137.5)%360;
+const S=a=>a.map(t=>t.l+t.v).join("");
+const R=a=>a.map(t=>`<span style="--h:${H(t.l)}">${t.l+t.v}</span>`).join("");
+const fa=n=>n.toLocaleString("fa-IR");
+
+// صدا: اول صدای ضبط‌شده‌ی مادر، بعد صدای فارسی گوشی
+const key=()=>"al_"+S(tgt);
+const saved=()=>{try{return localStorage.getItem(key())}catch(e){return null}};
+function speak(t){const s=window.speechSynthesis;if(!s||!t)return;s.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="fa-IR";u.rate=.7;const v=s.getVoices().find(x=>x.lang.toLowerCase().startsWith("fa"));if(v)u.voice=v;s.speak(u)}
+function play(){const d=saved();if(d)new Audio(d).play().catch(()=>{});else speak(S(tgt))}
+const say=()=>{clearTimeout(tm);tm=setTimeout(play,400)};
+async function rec(){
+  if(mr){mr.stop();return}
+  if(!tgt.length){$("rs").textContent="اول حرف‌ها را انتخاب کنید";return}
+  try{
+    ms=ms&&ms.active?ms:await navigator.mediaDevices.getUserMedia({audio:true});const st=ms,ch=[],k=key(),m=new MediaRecorder(st);
+    mr=m;m.ondataavailable=e=>ch.push(e.data);
+    m.onstop=()=>{mr=null;$("rb").innerHTML="<b>🎙</b><small>ضبط صدا</small>";
+      const f=new FileReader();f.onload=()=>{try{localStorage.setItem(k,f.result)}catch(e){$("rs").textContent="حافظه پر است";return}draw()};
+      f.readAsDataURL(new Blob(ch,{type:ch[0]?.type||"audio/webm"}))};
+    m.start();$("rb").innerHTML="<b>⏹</b><small>ایست</small>";$("rs").textContent="🔴 کلمه را بگویید، بعد ⏹ را بزنید";
+    setTimeout(()=>mr===m&&m.stop(),5000);
+  }catch(e){$("rs").textContent="میکروفون در دسترس نیست. اجازه بدهید یا لینک را مستقیم در کروم باز کنید."}
+}
+function rstat(){
+  if(!tgt.length)return "دو حرف انتخاب کنید و بعد حرکت را بزنید";
+  if(saved())return "✅ با صدای شما";
+  const s=window.speechSynthesis;
+  return s&&s.getVoices().some(v=>v.lang.toLowerCase().startsWith("fa"))?"🤖 صدای ماشینی":"🎙 صدایی ندارد. ضبط کنید";
+}
+function beep(fs){try{ac=ac||new AudioContext();fs.forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain(),s=ac.currentTime+i*.13;o.frequency.value=f;o.connect(g);g.connect(ac.destination);g.gain.setValueAtTime(.2,s);g.gain.exponentialRampToValueAtTime(.001,s+.25);o.start(s);o.stop(s+.26)})}catch(e){}}
+function confetti(){const E=["⭐","🎈","🌸","🎉","🦋"];for(let i=0;i<36;i++){const e=document.createElement("i");e.className="cf";e.textContent=E[i%5];e.style.left=Math.random()*95+"vw";e.style.animationDelay=Math.random()*.8+"s";document.body.appendChild(e);setTimeout(()=>e.remove(),3500)}}
+function mood(e){$("mc").textContent=e;setTimeout(()=>$("mc").textContent="🐰",1800)}
+
+$("vw").innerHTML=V.map(v=>`<button data-v="${v}">ـ${v}</button>`).join("");
+
+// ساده: فقط حرف‌های کلمه + چند حرف انحرافی
+function mkpool(){const u=[...new Set(tgt.map(t=>t.l))];const o=L.filter(x=>!u.includes(x)).sort(()=>Math.random()-.5).slice(0,Math.max(0,8-u.length));pool=[...u,...o].sort((a,b)=>L.indexOf(a)-L.indexOf(b))}
+const bs=a=>{const t=a[a.length-1];if(!t)return;if(t.v)t.v="";else a.pop()};
+
+$("pad").onclick=e=>{
+  const b=e.target.closest("button");if(!b)return;
+  const a=mode=="T"?tgt:ent;$("msg").textContent="";
+  try{navigator.vibrate&&navigator.vibrate(15)}catch(x){}
+  if(b.dataset.l){if(a.length<(mode=="T"?3:tgt.length))a.push({l:b.dataset.l,v:""})}
+  else if(a.length)a[a.length-1].v=b.dataset.v;
+  draw();
+  if(mode=="T")say();
+  else if(ent.length==tgt.length&&!!ent[ent.length-1].v==!!tgt[tgt.length-1].v)setTimeout(check,450);  // بررسی خودکار
+};
+
+function draw(){
+  $("T").hidden=$("dT").hidden=mode!="T";$("C").hidden=$("dC").hidden=mode!="C";
+  $("sc").textContent=fa(sc);$("st").textContent=ST.slice(0,Math.floor(sc/50)%11).join("");
+  $("tw").innerHTML=R(tgt)||"…";
+  if(!mr)$("rs").textContent=rstat();
+  $("cw").innerHTML=lvl=="easy"?R(tgt):"👂";
+  $("ci").innerHTML=tgt.map((t,i)=>{const e=ent[i];return `<span class="slot${e?" f":""}"${e?` style="--h:${H(e.l)}"`:""}>${e?e.l+e.v:"؟"}</span>`}).join("");
+  $("le").classList.toggle("on",lvl=="easy");$("ll").classList.toggle("on",lvl=="listen");
+  $("kb").innerHTML=(mode=="C"&&lvl=="easy"?pool:L).map(l=>`<button data-l="${l}" style="--h:${H(l)}">${l}</button>`).join("");
+  document.querySelectorAll("#pad button").forEach(b=>b.classList.toggle("hint",mode=="C"&&errs>=2&&tgt.some(t=>t.l==b.dataset.l||t.v==b.dataset.v)));
+}
+
+function check(){
+  if(mode!="C"||!ent.length)return;
+  if(JSON.stringify(ent)==JSON.stringify(tgt)){
+    sc+=10;try{localStorage.setItem("alefba",sc)}catch(e){}
+    beep([523,659,784,1047]);confetti();mood("🥳");
+    $("okt").innerHTML=`آفرین! 🎉<div class="word">${R(tgt)}</div>`+(sc%50==0?`<p>یک برچسب جدید گرفتی! ${ST[(sc/50-1)%10]}</p>`:"<p>۱۰+ امتیاز ⭐</p>");
+    $("ok").hidden=false;draw();
+  }else{
+    errs++;beep([330,262]);mood("🤗");
+    $("ci").classList.add("shake");setTimeout(()=>$("ci").classList.remove("shake"),450);
+    $("msg").textContent="دوباره امتحان کن، می‌توانی! 💪";ent=[];setTimeout(draw,450);
+  }
+}
+
+$("tsay").onclick=play;$("csay").onclick=play;
+$("tbs").onclick=()=>{bs(tgt);draw()};
+$("cbs").onclick=()=>{bs(ent);draw()};
+$("rb").onclick=rec;
+document.addEventListener("visibilitychange",()=>{if(document.hidden&&ms&&!mr){ms.getTracks().forEach(t=>t.stop());ms=null}});
+$("tgo").onclick=()=>{if(!tgt.length)return;mkpool();mode="C";ent=[];errs=0;draw();play()};
+$("cback").onclick=()=>{mode="T";draw()};
+$("le").onclick=()=>{lvl="easy";draw()};
+$("ll").onclick=()=>{lvl="listen";draw()};
+$("again").onclick=()=>{$("ok").hidden=true;ent=[];errs=0;draw();play()};
+$("newq").onclick=()=>{$("ok").hidden=true;mode="T";tgt=[];draw()};
+if(window.speechSynthesis)speechSynthesis.onvoiceschanged=()=>{if(!mr&&mode=="T")$("rs").textContent=rstat()};
+draw();
+</script>
+</body>
+</html>
